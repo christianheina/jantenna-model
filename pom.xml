@@ -207,7 +207,7 @@
 		</repository>
 	</distributionManagement>
 	<scm>
-		<connection>scm:git:https://github.com/christianheina/jantenna-phased-array.git</connection>
+		<connection>scm:git:https://github.com/christianheina/jantenna-model.git</connection>
 		<developerConnection>scm:git:https://github.com/christianheina/jantenna-model.git</developerConnection>
 		<url>https://github.com/christianheina/jantenna-model/tree/main</url>
 		<tag>HEAD</tag>

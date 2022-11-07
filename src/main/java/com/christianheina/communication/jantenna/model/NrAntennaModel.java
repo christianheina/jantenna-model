@@ -19,6 +19,7 @@ import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.complex.ComplexUtils;
 
 import com.christianheina.communication.jantenna.commons.ThetaPhi;
+import com.christianheina.communication.jantenna.model.enums.NrAntennaPolarizationModel;
 
 /**
  * Antenna model using model described in 3GPP TR 38.901 chapter 7.3.
@@ -48,19 +49,33 @@ public class NrAntennaModel extends AbstractAntennaModel {
     public static final double DEFAULT_MAXIMUM_GAIN = 8;
 
     /**
+     * Default polarization slant angle as described in 3GPP TR 38.901 Table 7.3-1.
+     */
+    public static final double DEFAULT_POLARIZATION_SLANT_ANGLE = 0;
+
+    /**
      * Default maximum attenuation as described in 3GPP TR 38.901 Table 7.3-1.
      */
     public static final double DEFAULT_MAXIMUM_ATTENUATION = 30;
 
+    /**
+     * Default polarization model as described in 3GPP TR 38.901 figure 7.3-4 and 7.3-5.
+     */
+    public static final NrAntennaPolarizationModel DEFAULT_POLARIZATION_MODEL = NrAntennaPolarizationModel.MODEL_2;
+
     private double verticalSidelobeAttenuation;
     private double maximumGain;
+    private double polarizationSlantAngle;
     private double maximumAttenuation;
+    private NrAntennaPolarizationModel polarizationModel;
 
     private NrAntennaModel(Builder builder) {
         super(builder);
         this.verticalSidelobeAttenuation = builder.verticalSidelobeAttenuation;
         this.maximumGain = builder.maximumGain;
+        this.polarizationSlantAngle = builder.polarizationSlantAngle;
         this.maximumAttenuation = builder.maximumAttenuation;
+        this.polarizationModel = builder.polarizationModel;
     }
 
     @Override
@@ -105,12 +120,30 @@ public class NrAntennaModel extends AbstractAntennaModel {
     }
 
     /**
+     * Retrieve polarization slant angle.
+     * 
+     * @return polarization slant angle.
+     */
+    public double getPolarizationSlantAngle() {
+        return polarizationSlantAngle;
+    }
+
+    /**
      * Retrieve maximum attenuation.
      * 
      * @return maximum attenuation.
      */
     public double getMaximumAttenuation() {
         return maximumAttenuation;
+    }
+
+    /**
+     * Retrieve polarization model.
+     * 
+     * @return polarization model.
+     */
+    public NrAntennaPolarizationModel getPolarizationModel() {
+        return polarizationModel;
     }
 
     static Builder newBuilder() {
@@ -126,7 +159,9 @@ public class NrAntennaModel extends AbstractAntennaModel {
 
         private double verticalSidelobeAttenuation = DEFAULT_VERTICAL_SIDELOBE_ATTENUATION;
         private double maximumGain = DEFAULT_MAXIMUM_GAIN;
+        private double polarizationSlantAngle = DEFAULT_POLARIZATION_SLANT_ANGLE;
         private double maximumAttenuation = DEFAULT_MAXIMUM_ATTENUATION;
+        private NrAntennaPolarizationModel polarizationModel = DEFAULT_POLARIZATION_MODEL;
 
         private Builder() {
             super(DEFAULT_VERTICAL_HALF_POWER_BEAM_WIDTH, DEFAULT_HORIZONTAL_HALF_POWER_BEAM_WIDTH);
@@ -159,6 +194,19 @@ public class NrAntennaModel extends AbstractAntennaModel {
         }
 
         /**
+         * Set polarization slant angle.
+         * 
+         * @param polarizationSlantAngle
+         *            the polarization slant angle to set.
+         * 
+         * @return this instance of {@link Builder}.
+         */
+        public Builder setPolarizationSlantAngle(double polarizationSlantAngle) {
+            this.polarizationSlantAngle = polarizationSlantAngle;
+            return this;
+        }
+
+        /**
          * Set maximum attenuation.
          * 
          * @param maximumAttenuation
@@ -168,6 +216,19 @@ public class NrAntennaModel extends AbstractAntennaModel {
          */
         public Builder setMaximumAttenuation(double maximumAttenuation) {
             this.maximumAttenuation = maximumAttenuation;
+            return this;
+        }
+
+        /**
+         * Set polarization model.
+         * 
+         * @param polarizationModel
+         *            the polarization model to set.
+         * 
+         * @return this instance of {@link Builder}.
+         */
+        public Builder setPolarizationModel(NrAntennaPolarizationModel polarizationModel) {
+            this.polarizationModel = polarizationModel;
             return this;
         }
 

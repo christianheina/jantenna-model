@@ -20,6 +20,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.christianheina.communication.jantenna.commons.ThetaPhi;
+import com.christianheina.communication.jantenna.model.enums.NrAntennaPolarizationModel;
 
 /**
  * Unit test for {@link ConjugateWeightAlgorithm}.
@@ -33,7 +34,9 @@ public class NrAntennaModelTest {
     private static final double HORIZONTAL_HALF_POWER_BEAM_WIDTH = 50;
     private static final double VERTICAL_SIDELOBE_ATTENUATION = 60;
     private static final double MAXIMUM_GAIN = 20;
+    private static final double POLARIZATION_SLANT_ANGLE = 45;
     private static final double MAXIMUM_ATTENUATION = 70;
+    private static final NrAntennaPolarizationModel POLARIZATION_MODEL = NrAntennaPolarizationModel.MODEL_1;
     private static final Complex FIRST_VALUE = Complex.ONE;
     private static final Complex SECOND_VALUE = Complex.ONE;
 
@@ -48,6 +51,8 @@ public class NrAntennaModelTest {
                 NrAntennaModel.DEFAULT_VERTICAL_SIDELOBE_ATTENUATION);
         Assert.assertEquals(defaultModel.getMaximumGain(), NrAntennaModel.DEFAULT_MAXIMUM_GAIN);
         Assert.assertEquals(defaultModel.getMaximumAttenuation(), NrAntennaModel.DEFAULT_MAXIMUM_ATTENUATION);
+        Assert.assertEquals(defaultModel.getPolarizationSlantAngle(), NrAntennaModel.DEFAULT_POLARIZATION_SLANT_ANGLE);
+        Assert.assertEquals(defaultModel.getPolarizationModel(), NrAntennaModel.DEFAULT_POLARIZATION_MODEL);
     }
 
     @Test
@@ -57,12 +62,14 @@ public class NrAntennaModelTest {
                 .setVerticalHalfPowerBeamWidth(VERTICAL_HALF_POWER_BEAM_WIDTH)
                 .setMaximumAttenuation(MAXIMUM_ATTENUATION)
                 .setVerticalSidelobeAttenuation(VERTICAL_SIDELOBE_ATTENUATION).setMaximumGain(MAXIMUM_GAIN)
-                .build();
+                .setPolarizationSlantAngle(POLARIZATION_SLANT_ANGLE).setPolarizationModel(POLARIZATION_MODEL).build();
         Assert.assertEquals(nonDefaultModel.getVerticalHalfPowerBeamWidth(), VERTICAL_HALF_POWER_BEAM_WIDTH);
         Assert.assertEquals(nonDefaultModel.getHorizontalHalfPowerBeamWidth(), HORIZONTAL_HALF_POWER_BEAM_WIDTH);
         Assert.assertEquals(nonDefaultModel.getVerticalSidelobeAttenuation(), VERTICAL_SIDELOBE_ATTENUATION);
         Assert.assertEquals(nonDefaultModel.getMaximumGain(), MAXIMUM_GAIN);
         Assert.assertEquals(nonDefaultModel.getMaximumAttenuation(), MAXIMUM_ATTENUATION);
+        Assert.assertEquals(nonDefaultModel.getPolarizationSlantAngle(), POLARIZATION_SLANT_ANGLE);
+        Assert.assertEquals(nonDefaultModel.getPolarizationModel(), POLARIZATION_MODEL);
     }
 
     @Test

@@ -21,6 +21,7 @@ import java.util.List;
 import com.christianheina.communication.jantenna.commons.Field;
 import com.christianheina.communication.jantenna.commons.ThetaPhi;
 import com.christianheina.communication.jantenna.model.AntennaModel;
+import com.christianheina.communication.jantenna.model.enums.NrAntennaPolarizationModel;
 
 /**
  * Save field to file example
@@ -34,7 +35,8 @@ public class CreateNrAntennaModel {
         // Create NR model with input parameters
         AntennaModel model = AntennaModel.newNrAntennaModelBuilder().setHorizontalHalfPowerBeamWidth(65)
                 .setVerticalHalfPowerBeamWidth(35).setVerticalSidelobeAttenuation(30).setMaximumGain(10)
-                .setMaximumAttenuation(30).build();
+                .setMaximumAttenuation(30).setPolarizationSlantAngle(0)
+                .setPolarizationModel(NrAntennaPolarizationModel.MODEL_2).build();
         // Angles for generating antenna model
         List<ThetaPhi> angleList = ThetaPhi.equallySpacedSphere(1);
         // Generate NR model
